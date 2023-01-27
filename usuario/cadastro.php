@@ -1,6 +1,6 @@
 <?php
 
-include_once "conexao.php";
+include_once "../conexao.php";
 session_start();
 ob_start();
 
@@ -19,14 +19,29 @@ ob_start();
 </head>
 
 <body>
-    <div class="w-100 d-flex justify-content-center align-items-center min-vh-100">
-        <div>
-            <h1 class="text-center">Projeto To Do List em PHP</h1>
-            <div class="text-center">
-                <a href="usuario/login.php" class="btn btn-primary">Login</a>
-                <a href="usuario/cadastro.php" class="btn btn-outline-secondary">Cadastrar</a>
+    <div class="my-3 w-100">
+        <h1 class="text-center">Cadastro</h1>
+
+        <?php
+        if (isset($_SESSION['msg'])) {
+            echo $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        ?>
+
+        <form action="cadastrar.php" method="post" class="container col-md-3 mx-auto">
+            <div class="mb-3 mt-5">
+                <label for="usuario" class="form-label">Usuário</label>
+                <input type="text" class="form-control" id="usuario" name="usuario">
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha">
+            </div>
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <a href="login.php" class="btn btn-outline-primary">Entrar</a>
+            <a href="../index.php" class="btn btn-outline-secondary">Voltar</a>
+        </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
