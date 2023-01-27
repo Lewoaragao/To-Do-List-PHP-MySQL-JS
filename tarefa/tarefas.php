@@ -27,7 +27,7 @@ $result = $conn->query($sqlListar);
 <body>
     <div class="my-3 col-md-6 mx-auto">
         <?php
-        if (isset($_SESSION['usuario_logado'])) {
+        if (isset($_SESSION['dsc_usuario_logado'])) {
             echo "<div class='my-3 text-end'>Olá <strong>" . $dsc_usuario_logado . "</strong>. <a href='../usuario/logout.php' class='btn btn-outline-danger btn-sm'>Sair</a></div>";
         }
         ?>
