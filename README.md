@@ -1,2 +1,1 @@
-# To-Do-List-PHP-MySQL-JS
- 
+# to-do-list-php-mysql
