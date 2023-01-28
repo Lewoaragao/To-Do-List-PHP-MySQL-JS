@@ -7,8 +7,8 @@ ob_start();
 $id_usuario_logado = $_SESSION['id_usuario_logado'];
 $dsc_usuario_logado = $_SESSION['dsc_usuario_logado'];
 
-$sqlListar = "SELECT * FROM t_tarefa WHERE id_usuario = '$id_usuario_logado';";
-$result = $conn->query($sqlListar);
+$sqlListarTodas = "SELECT * FROM t_tarefa WHERE id_usuario = '$id_usuario_logado'";
+$result = $conn->query($sqlListarTodas);
 
 ?>
 
@@ -19,9 +19,10 @@ $result = $conn->query($sqlListar);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List PHP</title>
+    <title>To do list PHP</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 
 <body>
@@ -31,15 +32,11 @@ $result = $conn->query($sqlListar);
             echo "<div class='my-3 text-end'>Olá <strong>" . $dsc_usuario_logado . "</strong>. <a href='../usuario/logout.php' class='btn btn-outline-danger btn-sm'>Sair</a></div>";
         }
         ?>
-        <h1 class="text-center">To Do List PHP</h1>
-        <form action="adicionar.php" method="post" id="formAddTarefa" class="row g-3 my-3 col-md-6 mx-auto">
+        <h1 class="text-center">To do list PHP</h1>
+        <form action="adicionar.php" method="post" id="formAddTarefa" class="row g-3 my-3 mx-auto">
             <div class="input-group">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="tarefa" name="tarefa"
-                        placeholder="nao pode deixar em branco para floating funcionar">
-                    <label for="tarefa">Descrição da tarefa</label>
-                </div>
-                <button class="btn btn-outline-success" type="submit">Adicionar</button>
+                <input type="text" class="form-control" name="tarefa" placeholder="Descrição da tarefa...">
+                <button class="btn btn-success" type="submit">Adicionar</button>
             </div>
         </form>
 
@@ -67,10 +64,10 @@ $result = $conn->query($sqlListar);
                         echo "<tr>";
                         echo "<td class='text-center align-middle'>" . $tarefa_data['id'] . "</td>";
                         echo "<td class='align-middle'>" . $tarefa_data['dsc_tarefa'] . "</td>";
-                        echo $tarefa_data['flg_resolvido'] == 1 ? "<td class='text-center align-middle'>Sim</td>" : "<td class='text-center align-middle'>Não</td>";
-                        echo $tarefa_data['flg_ativo'] == 1 ? "<td class='text-center align-middle'>Sim</td>" : "<td class='text-center align-middle'>Não</td>";
-                        echo "<td class='text-center align-middle'><a href='editar.php?id=" . $tarefa_data['id'] . "' class='btn btn-primary'>Editar</a></td>";
-                        echo "<td class='text-center align-middle'><a href='excluir.php?id=" . $tarefa_data['id'] . "' class='btn btn-danger align-middle'>Excluir</a></td>";
+                        echo $tarefa_data['flg_resolvido'] == 1 ? "<td class='text-center align-middle'><a href='alterar_resolvido.php?id=" . $tarefa_data['id'] . "'><i class='fa-solid fa-check text-success'></i></a></td>" : "<td class='text-center align-middle'><a href='alterar_resolvido.php?id=" . $tarefa_data['id'] . "'><i class='fa-solid fa-xmark text-danger'></i></a></td>";
+                        echo $tarefa_data['flg_ativo'] == 1 ? "<td class='text-center align-middle'><a href='alterar_ativo.php?id=" . $tarefa_data['id'] . "'><i class='fa-solid fa-check text-success'></i></a></td>" : "<td class='text-center align-middle'><a href='alterar_ativo.php?id=" . $tarefa_data['id'] . "'><i class='fa-solid fa-xmark text-danger'></i></a></td>";
+                        echo "<td class='text-center align-middle'><button disabled='disabled' href='editar.php?id=" . $tarefa_data['id'] . "' class='btn btn-sm btn-outline-primary'><i class='fa-sharp fa-solid fa-pen-to-square'></i></button></td>";
+                        echo "<td class='text-center align-middle'><a href='excluir.php?id=" . $tarefa_data['id'] . "' class='btn btn-sm btn-outline-danger align-middle'><i class='fa-solid fa-trash'></i></a></td>";
                         echo "</tr>";
                     }
                     ?>
